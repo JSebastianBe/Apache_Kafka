@@ -6,6 +6,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.kafka.core.KafkaTemplate;
 
+import java.util.Scanner;
+
 @SpringBootApplication
 public class SbProveedorApplication {
 
@@ -14,8 +16,15 @@ public class SbProveedorApplication {
 	}
 	@Bean
 	CommandLineRunner commandLineRunner(KafkaTemplate<String, String> kafkaTemplate){
-		return args -> {
-			kafkaTemplate.send("EquipoKafka-topic", "Mensaje inicial para kafka");
-		};
+		while(true){
+			String topico = "EquipoKafka-topic";
+			Scanner lectura = new Scanner (System.in);
+
+			System.out.println("Ingrese mensaje: ");
+
+			String mensaje = lectura.next();
+
+			kafkaTemplate.send(topico, "{tipo:1,msg:"+mensaje+"}");
+		}
 	}
 }
