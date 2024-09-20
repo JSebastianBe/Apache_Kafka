@@ -1,4 +1,4 @@
-package co.jsbm.kafka.SBProveedorController;
+package co.vinni.kafka.SBProveedor;
 
 public class Request {
     private String tipo;
