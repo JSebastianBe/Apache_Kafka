@@ -2,7 +2,7 @@ package co.vinni.kafka.SBProveedor;
 
 public class Request {
     private String tipo;
-    private String sms;
+    private Sms sms;
     private Email email;
 
     public String getTipo() {
@@ -13,11 +13,11 @@ public class Request {
         this.tipo = tipo;
     }
 
-    public String getSms() {
+    public Sms getSms() {
         return sms;
     }
 
-    public void setSms(String sms) {
+    public void setSms(Sms sms) {
         this.sms = sms;
     }
 

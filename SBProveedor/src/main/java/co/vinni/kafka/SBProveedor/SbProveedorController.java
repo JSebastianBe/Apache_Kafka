@@ -22,9 +22,16 @@ public class SbProveedorController {
 
         if(esPeticionValida(request)){
             try{
-                pa.sendMessage(request);
+                if(request.getTipo().equals("EquipoKafka-sms")){
+                    pa.sendMessage(request.getSms(), request.getTipo());
+                    response.put("msg", "Procesando sms");
+                }
+                if(request.getTipo().equals("EquipoKafka-email")){
+                    pa.sendMessage(request.getEmail(), request.getTipo());
+                    response.put("msg", "Procesando email");
+                }
                 response.put("status", "true");
-                response.put("msg", "Enviado exitosamente");
+
             } catch (Exception e) {
                 response.put("status", "false");
                 response.put("msg", "No se puede enviar la petición: " + e.getMessage());
@@ -39,8 +46,8 @@ public class SbProveedorController {
 
     private boolean esPeticionValida(Request request) {
         try{
-            if(request.getTipo().equals("1")){
-                if(request.getSms().isEmpty() || request.getSms().equals("")){
+            if(request.getTipo().equals("EquipoKafka-sms")){
+                if(request.getSms().getNumeroCel().isEmpty() || request.getSms().equals("")){
                     MensajeError = "Debe enviar un mensaje para el tipo de petición sms";
                     return false;
                 }
@@ -48,7 +55,7 @@ public class SbProveedorController {
                     MensajeError = "No debe enviar un email para el tipo de petición sms";
                     return false;
                 }
-            } else if (request.getTipo().equals("2")) {
+            } else if (request.getTipo().equals("EquipoKafka-email")) {
                 if(request.getSms() != null){
                     MensajeError = "No debe enviar un sms para el tipo de petición Email";
                     return false;

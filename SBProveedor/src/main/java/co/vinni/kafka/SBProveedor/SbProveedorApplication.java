@@ -20,8 +20,8 @@ public class SbProveedorApplication {
 		SpringApplication.run(SbProveedorApplication.class, args);
 	}
 
-	public void sendMessage(Object mensaje) {
-		String topico = "EquipoKafka-topic";
+	public void sendMessage(Object mensaje, String topico) {
+
 		kafkaTemplate.send(topico, mensaje);
 		System.out.println("Mensaje: " + mensaje + " enviado al tópico: " + topico);
 	}
