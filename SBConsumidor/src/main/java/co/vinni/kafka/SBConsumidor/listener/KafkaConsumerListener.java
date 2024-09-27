@@ -11,7 +11,7 @@ public class KafkaConsumerListener
 {
     private Logger LOGGER = LoggerFactory.getLogger(KafkaConsumerListener.class);
 
-    @KafkaListener(topics = {"EquipoKafka-topic"}, groupId = "my-group-id")
+    @KafkaListener(topics = {"EquipoKafka-sms"}, groupId = "my-group-id")
     public void listener(String message){
         LOGGER.info("Mensaje recibido: " + message);
     }
